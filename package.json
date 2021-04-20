@@ -1,0 +1,50 @@
+{
+  "name": "webthings-addon-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "npx prettier -w 'src/**/*.ts'",
+    "lint": "eslint src",
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tim-hellhake/webthings-addon-cli.git"
+  },
+  "author": "Tim Hellhake",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tim-hellhake/webthings-addon-cli/issues"
+  },
+  "homepage": "https://github.com/tim-hellhake/webthings-addon-cli#readme",
+  "files": [
+    "lib/commands/command.js",
+    "lib/commands/config.js",
+    "lib/commands/prepare-update.js",
+    "lib/commands/release-update.js",
+    "lib/config.js",
+    "lib/exec.js",
+    "lib/index.js"
+  ],
+  "devDependencies": {
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.14.32",
+    "@types/node-fetch": "^2.5.8",
+    "@types/semver": "^7.3.4",
+    "@types/tmp": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.2.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "mkdirp": "^1.0.4",
+    "node-fetch": "^2.6.1",
+    "semver": "^7.3.4",
+    "tmp": "^0.2.1"
+  }
+}
