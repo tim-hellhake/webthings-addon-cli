@@ -1,4 +1,5 @@
 [![Build Status](https://github.com/tim-hellhake/webthings-addon-cli/workflows/Build/badge.svg)](https://github.com/tim-hellhake/webthings-addon-cli/actions?query=workflow%3ABuild)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![license](https://img.shields.io/badge/license-MPL--2.0-blue.svg)](LICENSE)
 
 # WebThings addon CLI
