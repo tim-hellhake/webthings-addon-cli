@@ -5,6 +5,12 @@
 
 This CLI helps you to prepare a new release of your addon and publish it by adding it to the [addon-list](https://github.com/WebThingsIO/addon-list) repo.
 
+# Usage
+
+```bash
+npx webthings-addon-cli <command>
+```
+
 ## Commands
 
 ### Config
