@@ -23,13 +23,15 @@ export class PrepareUpdateCommand implements Command {
   }
 
   getArguments(): string {
-    return '<patch | minor | major>';
+    return '<patch | minor | major> (<postfix>)';
   }
 
   async execute(_config: Config, args: string[]): Promise<void> {
     if (args.length < 1) {
       // eslint-disable-next-line max-len
-      throw new Error('Usage: webthings-addon-cli prepare-update <patch | minor | major>');
+      throw new Error(
+        'Usage: webthings-addon-cli prepare-update <patch | minor | major> (<postfix>)'
+      );
     }
 
     let currentVersion;
@@ -50,7 +52,7 @@ export class PrepareUpdateCommand implements Command {
       throw new Error(`Could parse version ${currentVersion}`);
     }
 
-    const [level] = args;
+    const [level, postFix] = args;
     const files: string[] = [];
 
     for (const file of ['package.json', 'package-lock.json', 'manifest.json']) {
@@ -69,7 +71,7 @@ export class PrepareUpdateCommand implements Command {
       case 'patch':
       case 'minor':
       case 'major': {
-        const newVersion = semVer.inc(level).format();
+        const newVersion = semVer.inc(level).format() + (postFix ?? '');
 
         for (const file of files) {
           patchVersion(file, newVersion);

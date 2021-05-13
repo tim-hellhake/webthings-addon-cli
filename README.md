@@ -28,7 +28,7 @@ If you need to override some defaults, you can use this command.
 
 The config is saved under `~/.webthings-addon-cli/config.json`.
 
-### Prepare update <`patch`, `minor`, `major`>
+### Prepare update <`patch`, `minor`, `major`> (<postfix>)
 
 This command creates a new tagged release commit using the following steps:
 
