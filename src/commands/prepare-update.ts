@@ -13,6 +13,10 @@ import { Command } from './command';
 
 const { access } = promises;
 
+interface Package {
+  version: string;
+}
+
 export class PrepareUpdateCommand implements Command {
   getName(): string {
     return 'prepare-update';
@@ -28,12 +32,22 @@ export class PrepareUpdateCommand implements Command {
       throw new Error('Usage: webthings-addon-cli prepare-update <patch | minor | major>');
     }
 
-    const manifest = (getObject('./manifest.json') as unknown) as Manifest;
-    const { version } = manifest;
-    const semVer = parse(version);
+    let currentVersion;
+    const manifest = getObjectOrNothing<Manifest>('./manifest.json');
+
+    if (manifest) {
+      const { version } = manifest;
+      currentVersion = version;
+    } else {
+      console.log(`No manifest.json found, falling back to package.json`);
+      const { version } = getObject<Package>('./package.json');
+      currentVersion = version;
+    }
+
+    const semVer = parse(currentVersion);
 
     if (!semVer) {
-      throw new Error(`Could parse version ${version}`);
+      throw new Error(`Could parse version ${currentVersion}`);
     }
 
     const [level] = args;
@@ -80,13 +94,23 @@ export class PrepareUpdateCommand implements Command {
   }
 }
 
-export function getObject(path: string): Record<string, unknown> {
-  if (!existsSync(path)) {
+export function getObject<T>(path: string): T {
+  const object = getObjectOrNothing<T>(path);
+
+  if (!object) {
     throw new Error(`Could not find file ${path}`);
   }
 
-  const content = readFileSync(path).toString();
-  const object = JSON.parse(content);
+  return object;
+}
+
+export function getObjectOrNothing<T>(path: string): T | undefined {
+  let object;
+
+  if (existsSync(path)) {
+    const content = readFileSync(path).toString();
+    object = JSON.parse(content);
+  }
 
   return object;
 }
